@@ -1,0 +1,17 @@
+{
+  "name": "fakecommerce-generator",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "factoria": "^3.2.2",
+    "faker": "^5.5.3",
+    "nodemon": "^2.0.15",
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^4.5.2"
+  },
+  "dependencies": {
+    "node-factories": "^0.0.1",
+    "uuid": "^8.3.2"
+  }
+}
