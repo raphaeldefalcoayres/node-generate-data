@@ -11,6 +11,7 @@
     "typescript": "^4.5.2"
   },
   "dependencies": {
+    "json-server": "^0.17.0",
     "node-factories": "^0.0.1",
     "uuid": "^8.3.2"
   }

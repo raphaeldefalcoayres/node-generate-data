@@ -4,22 +4,20 @@ const { v4: uuidv4 } = require('uuid')
 
 const factory = ({ total = 1, content = {} }) => {
   let items = []
-  for (let index = 0; index < total; index++) {
+  // for (let index = 0; index < total; index++) {
+  for (let index = 0,len = total ; index < len ; index++) {
     items.push(content(index))
   }
   return items
 }
 
 const createProduct = ({ totalProducts = 5, totalBrands = 5, totalCategories = 3, totalSubcategories = 10 }) => {
-
   const categories = factory({ total: totalCategories, content: (index) => {
     return {
       id: uuidv4(),
       name: `Category ${index + 1}`
     }
   }})
-
-  const categoriesIds = categories.map(category => category.id)
 
   const brands = factory({ total: totalBrands, content: (index) => {
     return {
@@ -28,6 +26,7 @@ const createProduct = ({ totalProducts = 5, totalBrands = 5, totalCategories = 3
     }
   }})
 
+  const categoriesIds = categories.map(category => category.id)
   const brandsIds = brands.map(brand => brand.id)
 
   const subcategories = factory({ total: totalSubcategories, content: (index) => {
@@ -46,12 +45,16 @@ const createProduct = ({ totalProducts = 5, totalBrands = 5, totalCategories = 3
     return subcategories    
   }, [])
 
+  // console.log('categoriesIds', categoriesIds)
+  // console.log('subcategoriesByCategoryIds', subcategoriesByCategoryIds)
+
   const products = factory({
     total: totalProducts,
     content: () => {
       const price = parseFloat(faker.commerce.price())
       const brand = brandsIds[Math.floor(Math.random() * brands.length)]
-      const category = categoriesIds[Math.floor(Math.random() * categories.length)]
+      const categoriesIdsBySubcategories = Object.keys(subcategoriesByCategoryIds)
+      const category = categoriesIdsBySubcategories[Math.floor(Math.random() * categoriesIdsBySubcategories.length)]
       const subcategory = subcategoriesByCategoryIds[category][Math.floor(Math.random() * subcategoriesByCategoryIds[category].length)]
 
       return {
